@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spotify Authorization Callback</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .code { background: #f0f0f0; padding: 10px; border-radius: 5px; font-family: monospace; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Spotify Authorization Callback</h1>
+    <div id="result"></div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+        const error = urlParams.get('error');
+        
+        const resultDiv = document.getElementById('result');
+        
+        if (error) {
+            resultDiv.innerHTML = `<p class="error">Error: ${error}</p>`;
+        } else if (code) {
+            resultDiv.innerHTML = `
+                <p><strong>Authorization Code:</strong></p>
+                <div class="code">${code}</div>
+                <p>Copy this code and use it to get your access token.</p>
+            `;
+        } else {
+            resultDiv.innerHTML = '<p>No authorization code found in URL.</p>';
+        }
+    </script>
+</body>
+</html> 
